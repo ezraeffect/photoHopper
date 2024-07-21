@@ -1,6 +1,7 @@
 import datetime
 import logging
 import os
+import time
 import re
 import subprocess
 import sys
@@ -177,6 +178,8 @@ class SearchWorker(QThread):
                     LensModel = tag.get('EXIF:LensModel', 'NA')
 
                     if (exifDate == 'NA') and (fileDate == 'NA'):
+                        file_localtime = time.localtime(os.path.getmtime(fileDir))
+                        exifDate = datetime.datetime(*file_localtime[:6])
                         for t in tag.keys():
                             print(f"Key: {t}, value {tag[t]}")
                     else:
