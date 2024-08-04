@@ -10,6 +10,7 @@ import shutil
 import rawpy
 
 from systemTheme import getSysTheme
+import utils
 
 from PyQt6.QtCore import Qt, QModelIndex, QThread, pyqtSignal
 from PyQt6.QtGui import QStandardItemModel, QStandardItem, QPixmap, QFont, QBrush, QColor, QImage
@@ -261,7 +262,8 @@ class MainWindow(QWidget):
         self.searchWorker = None  # QThread 인스턴스를 저장할 변수
 
         # 로그 설정
-        logging.basicConfig(filename='app.log', level=logging.DEBUG,
+        log_filename = os.path.join(utils.get_app_directory(), 'app.log')
+        logging.basicConfig(filename=log_filename, level=logging.DEBUG,
                             format='%(asctime)s %(levelname)s: %(message)s')
     def initUI(self):
         self.setWindowTitle('photoHopper')
